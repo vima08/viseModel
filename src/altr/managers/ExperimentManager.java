@@ -5,6 +5,7 @@
  */
 package altr.managers;
 
+import altr.Environment;
 import altr.distributions.Distribution;
 import altr.entity.Offer;
 import altr.entity.Person;
@@ -18,18 +19,20 @@ import java.util.Collection;
  */
 public abstract class ExperimentManager {
     
-   // public PersonManager pM = new PersonManager();
-   // public GroupManager gM;
+    public PersonManager pM;
+    public GroupManager gM;
     public Experiment experiment;
+    public Environment env;
     int acceptanceCounter;
     int step;
     int stepNumber;
     int iterationNumber;
     
-    public ExperimentManager(Experiment experiment) {        
+    public ExperimentManager(Experiment experiment, Environment env) {
         this.experiment = experiment;
-        //this.gM = groupManager;  
-        PersonManager.init();
+        this.env = env;
+        this.pM = new PersonManager(this.env);
+        this.gM = new GroupManager(this.env);
         this.iterationNumber = experiment.getIterationNumber();
         stepNumber = experiment.getStepNumber();
     }
@@ -41,7 +44,7 @@ public abstract class ExperimentManager {
                 for(int i =0; i < stage.getStepNum(); i++) {                    
                     //System.out.println("Step " + step + ": ");
                     //System.out.println(pM.getPeople());
-                    Collection<Offer> offers = generateOffers(stage.getDestribution(), PersonManager.getPeople());
+                    Collection<Offer> offers = generateOffers(stage.getDestribution(), pM.getPeople());
                     boolean accepted = isAccepted(offers);                    
                     accept(accepted, offers);
                     if (accepted) acceptanceCounter++;
@@ -56,7 +59,7 @@ public abstract class ExperimentManager {
     };   
     
     protected void resetIteration() {
-        PersonManager.reset();
+        pM.reset();
         step = 0;
         acceptanceCounter = 0;
     }

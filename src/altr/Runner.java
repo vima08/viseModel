@@ -30,11 +30,8 @@ public class Runner {
     
     public static void main(String[] args) throws CloneNotSupportedException {         
 
-        GroupManager.init();
-        PersonManager.init();
-        Person groupMan = new Person(10, true, 0, 0, 1, "name", new SimpleGroupStrategy(0.0));
-        Person egoist = new Person(10, true, 0, 0, 1, "name", new SimpleEgoisticStrategy());
-               
+        Person groupMan = new Person(10, true, 0, 1, 0, "name", null);
+        Person egoist = new Person(10, true, 1, 0, 0, "name", null);
 
         Experiment exp = new Experiment(1, ITERATION_NUMBER, "", "test1");        
         Stage stage = new Stage(exp.getId(), STEP_NUMBER, new NormDistr(-.8, 30), 1);        
@@ -42,10 +39,8 @@ public class Runner {
         System.out.println(exp); 
         
         for(int i = 1; i < PEOPLE_NUM; i++){
-            Collection<Person> group = PersonManager.clonePerson(groupMan, i);
-            Collection<Person> others = PersonManager.clonePerson(egoist, PEOPLE_NUM - i);
-
-            SimpleExperimentManager eM = new SimpleExperimentManager(exp, group, others);            
+            Environment env = new Environment("test");
+            SimpleExperimentManager eM = new SimpleExperimentManager(exp, env, groupMan, i, egoist, PEOPLE_NUM - i);
             eM.carryOut();  
             System.out.println(i);
         }

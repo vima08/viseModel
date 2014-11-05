@@ -8,25 +8,29 @@ package altr.managers;
 import altr.entity.Person;
 import java.util.ArrayList;
 import java.util.Collection;
-import static altr.Environment.people;
+import altr.Environment;
 
 /**
  *
  * @author Vitaly
  */
 public class PersonManager {
-    //private Collection<Person> people;    
+    private final Environment env;
 
-    public static Collection<Person> getPeople() {
-        return people;
+    public PersonManager(Environment env) {
+        this.env = env;
     }
 
-    public static void setPeople(Collection<Person> _people) {
-        people = _people;
+    public Collection<Person> getPeople() {
+        return env.getPeople();
+    }
+
+    public void setPeople(Collection<Person> people) {
+        env.setPeople(people);
     }
         
-    public static void reset() {
-        for(Person p: people) {
+    public void reset() {
+        for(Person p: getPeople()) {
             p.setMoney(p.getInitialMoney());
             p.setActive(true);
         }
@@ -41,9 +45,5 @@ public class PersonManager {
         
         return people;
     }
-
-    public static void init() {
-        people = new ArrayList();
-    }  
     
 }

@@ -5,12 +5,14 @@
  */
 package altr.managers;
 
+import altr.Environment;
 import static altr.Runner.writer;
 import altr.distributions.Distribution;
 import altr.entity.Group;
 import altr.entity.Offer;
 import altr.entity.Person;
 import altr.experiment.Experiment;
+import altr.strategies.SimpleEgoisticStrategy;
 import altr.strategies.SimpleGroupStrategy;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,31 +31,33 @@ public class SimpleExperimentManager extends ExperimentManager {
     double[] acceptanceCounters;
     int groupSize;
 
-    public SimpleExperimentManager(Experiment experiment, Collection<Person> group, Collection<Person> others) {
-        super(experiment);
-        this.group = group;
-        this.others = others;
-        this.groupSize = group.size();
+    public SimpleExperimentManager(Experiment experiment, Environment env, Person groupMan, int groupSize, Person egoist, int egoSize) throws CloneNotSupportedException {
+        super(experiment, env);
+        this.groupSize = groupSize;
         groupAvgMoney = new double[stepNumber]; 
         othersAvgMoney = new double[stepNumber]; 
         avgMoney = new double[stepNumber]; 
         acceptanceCounters = new double[stepNumber]; 
+        groupMan.setStrategy(new SimpleGroupStrategy(gM, 0.0));
+        egoist.setStrategy(new SimpleEgoisticStrategy());
+        this.group = PersonManager.clonePerson(groupMan, groupSize);
+        this.others = PersonManager.clonePerson(egoist, egoSize);
         
-        GroupManager.clear();
+        gM.clear();
         Group g = new Group("test group", "group1");
-        GroupManager.addGroup(g);        
-        GroupManager.addPeopleToGroup(group, g.getId());
+        gM.addGroup(g);
+        gM.addPeopleToGroup(group, g.getId());
 //        ((SimpleGroupStrategy)group.iterator().next().getStrategy()).init();
-        PersonManager.getPeople().addAll(group);        
-        PersonManager.getPeople().addAll(others);
+        pM.getPeople().addAll(group);
+        pM.getPeople().addAll(others);
     }
     
     @Override
     protected void accept(Boolean isAccepted, Collection<Offer> offers) {
         if (!isAccepted) return;
-        ArrayList<Person> p = (ArrayList)PersonManager.getPeople();
+        ArrayList<Person> p = (ArrayList)pM.getPeople();
         ArrayList<Offer> o = (ArrayList)offers;
-        for(int i =0; i < PersonManager.getPeople().size(); i++) {            
+        for(int i =0; i < pM.getPeople().size(); i++) {
             Double money = p.get(i).getMoney();
             p.get(i).setMoney(money + o.get(i).getAmmount());
         }
@@ -78,7 +82,7 @@ public class SimpleExperimentManager extends ExperimentManager {
     protected void analysis() {
         double avg = Analyzer.getAverageMoney(group);
         double avg1 = Analyzer.getAverageMoney(others);
-        double avg2 = Analyzer.getAverageMoney(PersonManager.getPeople());
+        double avg2 = Analyzer.getAverageMoney(pM.getPeople());
         groupAvgMoney[step] += avg;
         othersAvgMoney[step] += avg1;
         avgMoney[step] += avg2;  
@@ -99,9 +103,9 @@ public class SimpleExperimentManager extends ExperimentManager {
     @Override
     protected boolean isAccepted(Collection<Offer> offers) {
         double votes = 0;
-        long number = PersonManager.getPeople().size();
-        for(Person p: PersonManager.getPeople()) {
-            if (p.getStrategy().vote(offers, PersonManager.getPeople(),  p.getId())) votes++;
+        long number = pM.getPeople().size();
+        for(Person p: pM.getPeople()) {
+            if (p.getStrategy().vote(offers, pM.getPeople(),  p.getId())) votes++;
         }
         double percentage = votes / number;
         return (percentage >= 0.5);
@@ -109,7 +113,7 @@ public class SimpleExperimentManager extends ExperimentManager {
 
     @Override
     protected void postprocessing() {
-        for(Person p: PersonManager.getPeople()){
+        for(Person p: pM.getPeople()){
             p.setActive(p.getMoney() < 0);
         }
     }

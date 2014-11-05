@@ -10,72 +10,70 @@ import altr.entity.Membership;
 import altr.entity.Person;
 import java.util.ArrayList;
 import java.util.Collection;
-import static altr.Environment.*;
+import altr.Environment;
 
 /**
  *
  * @author Vitaly
  */
 public class GroupManager {
-    //private Collection<Group> groups; 
-    //private Collection<Membership> memberships;
+    private final Environment env;
 
-    public static Collection<Group> getGroups() {
-        return groups;
+    public GroupManager(Environment env) {
+        this.env = env;
     }
 
-    public static void setGroups(Collection<Group> _groups) {
-        groups = _groups;
+    public Collection<Group> getGroups() {
+        return env.getGroups();
+    }
+
+    public void setGroups(Collection<Group> groups) {
+        env.setGroups(groups);
     }
 
     public Collection<Membership> getMemberships() {
-        return memberships;
+        return env.getMemberships();
     }
 
-    public static void setMemberships(Collection<Membership> _memberships) {
-        memberships = _memberships;
+    public void setMemberships(Collection<Membership> memberships) {
+        env.setMemberships(memberships);
     }   
     
-    public static void addPeopleToGroup(Collection<Person> people, long groupId) {
+    public void addPeopleToGroup(Collection<Person> people, long groupId) {
         for(Person p: people) {
-            memberships.add(new Membership(p.getId(), groupId));
+            getMemberships().add(new Membership(p.getId(), groupId));
         }        
     }   
     
-    public static void addGroup(Group g) {
-        groups.add(g);
+    public void addGroup(Group g) {
+        getGroups().add(g);
     }
      
-    public static Collection<Long> getMembersByGroupId(long groupId){
-        if (groups == null || memberships == null) return null;
+    public Collection<Long> getMembersByGroupId(long groupId){
+        if (getGroups() == null || getMemberships() == null) return null;
         
         Collection<Long> members = new ArrayList();
-        for(Membership m: memberships) {
+        for(Membership m: getMemberships()) {
             if (m.getGroupId() == groupId) members.add(m.getPersonId());
         }
         
         return members;
     }
     
-    public static Collection<Long> getGroupsByPersonId(long personId){
-        if (groups == null || memberships == null) return null;
+    public Collection<Long> getGroupsByPersonId(long personId){
+        if (getGroups() == null || getMemberships() == null) return null;
         
         Collection<Long> personGroups = new ArrayList();
-        for(Membership m: memberships) {
+        for(Membership m: getMemberships()) {
             if (m.getPersonId() == personId) personGroups.add(m.getGroupId());
         }
         
         return personGroups;
     }   
     
-    public static void clear() {
-        groups = new ArrayList<>();
-        memberships = new ArrayList<>();
+    public void clear() {
+        getGroups().clear();
+        getMemberships().clear();
     }
-
-    public static void init() {
-        groups = new ArrayList<>();
-        memberships = new ArrayList<>();
-    }    
     
 }
