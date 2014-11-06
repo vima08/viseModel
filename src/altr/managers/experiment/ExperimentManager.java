@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package altr.managers;
+package altr.managers.experiment;
 
 import altr.Environment;
 import altr.distributions.Distribution;
@@ -11,6 +11,8 @@ import altr.entity.Offer;
 import altr.entity.Person;
 import altr.experiment.Experiment;
 import altr.experiment.Stage;
+import altr.managers.GroupManager;
+import altr.managers.PersonManager;
 import java.util.Collection;
 
 /**

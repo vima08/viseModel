@@ -9,8 +9,8 @@ import altr.entity.Person;
 import altr.experiment.Stage;
 import altr.experiment.Experiment;
 import altr.distributions.NormDistr;
-import altr.managers.AltrExperimentManager;
-import altr.managers.SimpleExperimentManager;
+import altr.managers.experiment.AltrExperimentManager;
+import altr.managers.experiment.SimpleExperimentManager;
 import javenue.csv.Csv;
 
 /**
