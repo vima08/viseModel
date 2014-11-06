@@ -30,6 +30,7 @@ public class SimpleExperimentManager extends ExperimentManager {
     double[] avgMoney;
     double[] acceptanceCounters;
     int groupSize;
+    SimpleGroupStrategy groupStrategy;
 
     public SimpleExperimentManager(Experiment experiment, Environment env, Person groupMan, int groupSize, Person egoist, int egoSize) throws CloneNotSupportedException {
         super(experiment, env);
@@ -38,16 +39,16 @@ public class SimpleExperimentManager extends ExperimentManager {
         othersAvgMoney = new double[stepNumber]; 
         avgMoney = new double[stepNumber]; 
         acceptanceCounters = new double[stepNumber]; 
-        groupMan.setStrategy(new SimpleGroupStrategy(gM, 0.0));
+        groupStrategy = new SimpleGroupStrategy(gM, 0.0);
+        groupMan.setStrategy(groupStrategy);
         egoist.setStrategy(new SimpleEgoisticStrategy());
         this.group = PersonManager.clonePerson(groupMan, groupSize);
         this.others = PersonManager.clonePerson(egoist, egoSize);
-        
-        gM.clear();
+
         Group g = new Group("test group", "group1");
         gM.addGroup(g);
         gM.addPeopleToGroup(group, g.getId());
-//        ((SimpleGroupStrategy)group.iterator().next().getStrategy()).init();
+        groupStrategy.init();
         pM.getPeople().addAll(group);
         pM.getPeople().addAll(others);
     }
@@ -73,7 +74,7 @@ public class SimpleExperimentManager extends ExperimentManager {
 //        }
         int last = stepNumber-1;
         writer.value(Double.toString(groupAvgMoney[last]/iterationNumber)).value(Double.toString(othersAvgMoney[last]/iterationNumber)).
-            value(Double.toString(avgMoney[last]/iterationNumber)).//value(Double.toString(acceptanceCounters[last]/iterationNumber)).
+            value(Double.toString(avgMoney[last]/iterationNumber)).value(Double.toString(acceptanceCounters[last]/iterationNumber)).
             newLine();
         System.out.println("Finished!");
     }
@@ -113,8 +114,9 @@ public class SimpleExperimentManager extends ExperimentManager {
 
     @Override
     protected void postprocessing() {
+        groupStrategy.reset();
         for(Person p: pM.getPeople()){
-            p.setActive(p.getMoney() < 0);
+            p.setActive(p.getMoney() > 0);
         }
     }
     

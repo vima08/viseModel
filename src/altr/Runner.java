@@ -26,7 +26,7 @@ public class Runner {
     
     static int ITERATION_NUMBER = 100;
     static int STEP_NUMBER = 20;
-    static int PEOPLE_NUM = 40;
+    static int PEOPLE_NUM = 500;
     
     public static void main(String[] args) throws CloneNotSupportedException {         
 
@@ -39,10 +39,10 @@ public class Runner {
         System.out.println(exp); 
         
         for(int i = 1; i < PEOPLE_NUM; i++){
+            System.out.println("group size = " + i);
             Environment env = new Environment("test");
             SimpleExperimentManager eM = new SimpleExperimentManager(exp, env, groupMan, i, egoist, PEOPLE_NUM - i);
-            eM.carryOut();  
-            System.out.println(i);
+            eM.carryOut();
         }
         
         writer.close();
