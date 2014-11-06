@@ -64,7 +64,17 @@ public class Analyzer {
         } else {
             throw new Exception("getAverageOffer: count != personIds.size()");
         }
-    }   
+    }
+
+    public static double getAverageOffer(Collection<Offer> offers) {
+        int count = 0;
+        double sum = 0;
+        for(Offer o: offers) {
+            count++;
+            sum += o.getAmmount();
+        }
+        return sum / count;
+    }
     
     public static List<Person> sort(Collection<Person> people) {
         List<Person> rezult = new ArrayList(people);
