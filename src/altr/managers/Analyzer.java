@@ -19,12 +19,7 @@ import java.util.List;
  */
 public class Analyzer {
     
-    private static Comparator<Person> comparator = new Comparator<Person>() {
-        @Override
-        public int compare(Person p1, Person p2) {
-            return (int) (p1.getMoney() - p2.getMoney()); 
-        }
-    };
+    private static Comparator<Person> comparator = (p1, p2) -> (int) (p1.getMoney() - p2.getMoney());
     
     public static double getAverageMoney(Collection<Person> people) {
         double sum = 0;
@@ -74,6 +69,24 @@ public class Analyzer {
             sum += o.getAmmount();
         }
         return sum / count;
+    }
+    
+    public static long getPositiveOffersCount(Collection<Offer> offers) {
+        long count = 0;        
+        for(Offer o: offers) {
+            if (o.getAmmount() > 0) 
+                count++;
+        }
+        return count;
+    }
+    
+    public static double getPositiveOffersProportion(Collection<Offer> offers) {
+        double count = 0;        
+        for(Offer o: offers) {
+            if (o.getAmmount() > 0) 
+                count += 1;
+        }
+        return count/offers.size();
     }
     
     public static List<Person> sort(Collection<Person> people) {
