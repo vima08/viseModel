@@ -3,12 +3,12 @@ package altr;
 import altr.entity.Group;
 import altr.entity.Membership;
 import altr.entity.Person;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *
  * @author Vitaly
  */
 public class Environment {
