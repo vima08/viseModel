@@ -46,4 +46,12 @@ public class PersonManager {
         return people;
     }
     
+    public static Person getPersonById(long id, Collection<Person> people) {
+        for(Person person: people) {
+            if (id == person.getId()) {
+                return person;
+            }
+        }
+        return null;
+    }    
 }
