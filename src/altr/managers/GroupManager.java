@@ -3,12 +3,13 @@ package altr.managers;
 import altr.entity.Group;
 import altr.entity.Membership;
 import altr.entity.Person;
+
 import java.util.ArrayList;
 import java.util.Collection;
+
 import altr.Environment;
 
 /**
- *
  * @author Vitaly
  */
 public class GroupManager {
@@ -32,43 +33,43 @@ public class GroupManager {
 
     public void setMemberships(Collection<Membership> memberships) {
         env.setMemberships(memberships);
-    }   
-    
+    }
+
     public void addPeopleToGroup(Collection<Person> people, long groupId) {
-        for(Person p: people) {
+        for (Person p : people) {
             getMemberships().add(new Membership(p.getId(), groupId));
-        }        
-    }   
-    
+        }
+    }
+
     public void addGroup(Group g) {
         getGroups().add(g);
     }
-     
-    public Collection<Long> getMembersByGroupId(long groupId){
+
+    public Collection<Long> getMembersByGroupId(long groupId) {
         if (getGroups() == null || getMemberships() == null) return null;
-        
+
         Collection<Long> members = new ArrayList();
-        for(Membership m: getMemberships()) {
+        for (Membership m : getMemberships()) {
             if (m.getGroupId() == groupId) members.add(m.getPersonId());
         }
-        
+
         return members;
     }
-    
-    public Collection<Long> getGroupsByPersonId(long personId){
+
+    public Collection<Long> getGroupsByPersonId(long personId) {
         if (getGroups() == null || getMemberships() == null) return null;
-        
+
         Collection<Long> personGroups = new ArrayList();
-        for(Membership m: getMemberships()) {
+        for (Membership m : getMemberships()) {
             if (m.getPersonId() == personId) personGroups.add(m.getGroupId());
         }
-        
+
         return personGroups;
-    }   
-    
+    }
+
     public void clear() {
         getGroups().clear();
         getMemberships().clear();
     }
-    
+
 }

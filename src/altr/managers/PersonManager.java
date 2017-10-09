@@ -1,12 +1,13 @@
 package altr.managers;
 
 import altr.entity.Person;
+
 import java.util.ArrayList;
 import java.util.Collection;
+
 import altr.Environment;
 
 /**
- *
  * @author Vitaly
  */
 public class PersonManager {
@@ -23,30 +24,30 @@ public class PersonManager {
     public void setPeople(Collection<Person> people) {
         env.setPeople(people);
     }
-        
+
     public void reset() {
-        for(Person p: getPeople()) {
+        for (Person p : getPeople()) {
             p.setMoney(p.getInitialMoney());
             p.setActive(true);
         }
     }
-    
-    public static Collection<Person> clonePerson(Person person, long number) throws CloneNotSupportedException {        
+
+    public static Collection<Person> clonePerson(Person person, long number) throws CloneNotSupportedException {
         Collection<Person> people = new ArrayList();
-        
-        for(int i = 0; i < number; i++){
+
+        for (int i = 0; i < number; i++) {
             people.add((Person) person.clone());
-        }        
-        
+        }
+
         return people;
     }
-    
+
     public static Person getPersonById(long id, Collection<Person> people) {
-        for(Person person: people) {
+        for (Person person : people) {
             if (id == person.getId()) {
                 return person;
             }
         }
         return null;
-    }    
+    }
 }
