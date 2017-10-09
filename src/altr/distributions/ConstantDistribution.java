@@ -1,10 +1,10 @@
 package altr.distributions;
 
 /**
- *
  * @author Vitaly
  */
-public class ConstDistr implements Distribution {
+// technically in is not a distribution
+public class ConstantDistribution implements Distribution {
 
     @Override
     public double getValue() {
@@ -13,7 +13,7 @@ public class ConstDistr implements Distribution {
 
     @Override
     public String getName() {
-        return "ConstDistr";
+        return "ConstantDistribution";
     }
-    
+
 }

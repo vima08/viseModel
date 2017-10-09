@@ -3,17 +3,16 @@ package altr.distributions;
 import java.util.Random;
 
 /**
- *
  * @author Vitaly
  */
-public class NormDistr implements Distribution {
-    
+public class NormalDistribution implements Distribution {
+
     private final Random generator = new Random();
     private final double mean;
     private final double deviation;
-    
-    
-    public NormDistr(double mean, double deviation) {
+
+
+    public NormalDistribution(double mean, double deviation) {
         this.mean = mean;
         this.deviation = deviation;
     }
@@ -25,7 +24,7 @@ public class NormDistr implements Distribution {
 
     @Override
     public String getName() {
-        return "NormDistr";
+        return "NormalDistribution";
     }
-    
+
 }
