@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- *
  * @author Vitaly
  */
 public class Experiment {
@@ -14,7 +13,7 @@ public class Experiment {
     private String description;
     private Date date;
     private String name;
-    private Collection<Stage> stages;        
+    private Collection<Stage> stages;
 
     public long getId() {
         return id;
@@ -62,11 +61,11 @@ public class Experiment {
 
     public void setIterationNumber(int iterationCount) {
         this.iterationNumber = iterationCount;
-    }    
-    
+    }
+
     public int getStepNumber() {
         int stepNumber = 0;
-        for(Stage s: getStages()) {
+        for (Stage s : getStages()) {
             stepNumber += s.getStepNum();
         }
         return stepNumber;
@@ -74,13 +73,13 @@ public class Experiment {
 
     public Experiment(long id, int iterationCount, String description, String name) {
         this.id = id;
-        this.iterationNumber = iterationCount; 
+        this.iterationNumber = iterationCount;
         this.description = description;
         this.date = new Date();
         this.name = name;
         this.stages = new ArrayList();
-    }  
-    
+    }
+
     public void addStage(Stage stage) {
         stages.add(stage);
     }
@@ -89,5 +88,5 @@ public class Experiment {
     public String toString() {
         return "Experiment{" + "id=" + id + ", description=" + description + ", date=" + date + ", name=" + name + ", stages=" + stages + '}';
     }
-    
+
 }

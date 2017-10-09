@@ -3,7 +3,6 @@ package altr.experiment;
 import altr.distributions.api.Distribution;
 
 /**
- *
  * @author Vitaly
  */
 public class Stage {
@@ -49,11 +48,11 @@ public class Stage {
         this.stepNum = stepNum;
         this.distribution = distribution;
         this.order = order;
-    }   
+    }
 
     @Override
     public String toString() {
         return "Stage{" + "experimentId=" + experimentId + ", stepNum=" + stepNum + ", distribution=" + distribution.getName() + ", order=" + order + '}';
     }
-    
+
 }
