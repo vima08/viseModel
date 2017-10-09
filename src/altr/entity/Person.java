@@ -29,6 +29,10 @@ public class Person implements Cloneable {
     public long getId() {
         return id;
     }    
+
+    public void setId(long id) {
+        this.id = id;
+    }
     
     public double getMoney() {
         return money;
@@ -97,7 +101,7 @@ public class Person implements Cloneable {
         p.altr = altr;
         p.ego = ego;
         p.group = group;
-        p.id = uniqueId.getAndIncrement();;
+        p.id = uniqueId.getAndIncrement();
         p.money = money;
         p.name = name;
         return p;
