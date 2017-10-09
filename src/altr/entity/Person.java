@@ -1,16 +1,16 @@
 package altr.entity;
 
 import altr.strategies.Strategy;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *
  * @author Vitaly
  */
 public class Person implements Cloneable {
-    
+
     private static AtomicInteger uniqueId = new AtomicInteger();
-    
+
     private long id;
     private double money;
     private double initialMoney;
@@ -23,12 +23,12 @@ public class Person implements Cloneable {
 
     public long getId() {
         return id;
-    }    
+    }
 
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public double getMoney() {
         return money;
     }
@@ -88,10 +88,10 @@ public class Person implements Cloneable {
     public double getInitialMoney() {
         return initialMoney;
     }
-    
+
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Person p = (Person) super.clone(); 
+        Person p = (Person) super.clone();
         p.active = active;
         p.altr = altr;
         p.ego = ego;
@@ -118,6 +118,6 @@ public class Person implements Cloneable {
         this.altr = altr;
         this.name = name;
         this.strategy = strategy;
-    }  
-    
+    }
+
 }

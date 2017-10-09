@@ -2,7 +2,7 @@ package altr.managers.experiment;
 
 import altr.Environment;
 import static altr.Runner.writer;
-import altr.distributions.Distribution;
+import altr.distributions.api.Distribution;
 import altr.entity.Offer;
 import altr.entity.Person;
 import altr.experiment.Experiment;
@@ -59,8 +59,8 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
         } else {
             for(Offer o: offers) {
                 Person p  = PersonManager.getPersonById(o.getPersonId(), people);
-                p.setMoney(p.getMoney() + o.getAmmount());
-                totalIncrement[0] += o.getAmmount();
+                p.setMoney(p.getMoney() + o.getAmount());
+                totalIncrement[0] += o.getAmount();
                 incrementCounter[0]++;
             }       
         }

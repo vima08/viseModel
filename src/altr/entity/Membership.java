@@ -1,7 +1,6 @@
 package altr.entity;
 
 /**
- *
  * @author Vitaly
  */
 public class Membership {
@@ -22,11 +21,11 @@ public class Membership {
 
     public void setGroupId(long groupId) {
         this.groupId = groupId;
-    }     
+    }
 
     public Membership(long personId, long groupId) {
         this.personId = personId;
         this.groupId = groupId;
     }
-     
+
 }

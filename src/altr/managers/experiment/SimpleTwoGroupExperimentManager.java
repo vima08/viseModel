@@ -2,7 +2,7 @@ package altr.managers.experiment;
 
 import altr.Environment;
 import static altr.Runner.writer;
-import altr.distributions.Distribution;
+import altr.distributions.api.Distribution;
 import altr.entity.Group;
 import altr.entity.Offer;
 import altr.entity.Person;
@@ -67,7 +67,7 @@ public class SimpleTwoGroupExperimentManager extends ExperimentManager {
         ArrayList<Offer> o = (ArrayList)offers;
         for(int i =0; i < pM.getPeople().size(); i++) {
             Double money = p.get(i).getMoney();
-            p.get(i).setMoney(money + o.get(i).getAmmount());
+            p.get(i).setMoney(money + o.get(i).getAmount());
         }
     }
 

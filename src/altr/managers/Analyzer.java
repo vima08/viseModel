@@ -46,7 +46,7 @@ public class Analyzer {
         for(Offer o: offers) {
             if (personIds.contains(o.getPersonId())) {
                 count++;
-                sum += o.getAmmount();
+                sum += o.getAmount();
             }
         }
         if (count == personIds.size()) {
@@ -61,7 +61,7 @@ public class Analyzer {
         double sum = 0;
         for(Offer o: offers) {
             count++;
-            sum += o.getAmmount();
+            sum += o.getAmount();
         }
         return sum / count;
     }
@@ -69,7 +69,7 @@ public class Analyzer {
     public static long getPositiveOffersCount(Collection<Offer> offers) {
         long count = 0;        
         for(Offer o: offers) {
-            if (o.getAmmount() > 0) 
+            if (o.getAmount() > 0)
                 count++;
         }
         return count;
@@ -78,7 +78,7 @@ public class Analyzer {
     public static double getPositiveOffersProportion(Collection<Offer> offers) {
         double count = 0;        
         for(Offer o: offers) {
-            if (o.getAmmount() > 0) 
+            if (o.getAmount() > 0)
                 count += 1;
         }
         return count/offers.size();

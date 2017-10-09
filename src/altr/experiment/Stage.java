@@ -1,6 +1,6 @@
 package altr.experiment;
 
-import altr.distributions.Distribution;
+import altr.distributions.api.Distribution;
 
 /**
  *

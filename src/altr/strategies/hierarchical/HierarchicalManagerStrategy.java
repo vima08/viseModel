@@ -27,12 +27,12 @@ public class HierarchicalManagerStrategy implements Strategy {
         double t = 0;
         for(Offer offer: offers) {
             if (offer.getPersonId() == personId) {
-                s = offer.getAmmount();
+                s = offer.getAmount();
             } else {
                 long id = offer.getPersonId() / 3;
                 id = offer.getPersonId() % 3 == 0 ? id - 1: id;
                 if (id == personId) {
-                    t += offer.getAmmount();
+                    t += offer.getAmount();
                 }
             }
         }

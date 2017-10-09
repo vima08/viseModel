@@ -2,15 +2,12 @@ package altr.managers.experiment;
 
 import altr.Environment;
 import static altr.Runner.writer;
-import altr.distributions.Distribution;
-import altr.entity.Group;
+import altr.distributions.api.Distribution;
 import altr.entity.Offer;
 import altr.entity.Person;
 import altr.experiment.Experiment;
 import altr.managers.Analyzer;
 import altr.managers.PersonManager;
-import altr.strategies.SimpleEgoisticStrategy;
-import altr.strategies.SimpleGroupStrategy;
 import altr.strategies.hierarchical.HierarchicalBossStrategy;
 import altr.strategies.hierarchical.HierarchicalEmployeeStrategy;
 import altr.strategies.hierarchical.HierarchicalManagerStrategy;
@@ -68,7 +65,7 @@ public class HierarchicalExperimentManager extends ExperimentManager {
         ArrayList<Offer> o = (ArrayList)offers;
         for(int i =0; i < pM.getPeople().size(); i++) {
             Double money = p.get(i).getMoney();
-            p.get(i).setMoney(money + o.get(i).getAmmount());
+            p.get(i).setMoney(money + o.get(i).getAmount());
         }
     }
 
@@ -107,9 +104,9 @@ public class HierarchicalExperimentManager extends ExperimentManager {
         for(Person p: people) {
             Offer offer = new Offer(dist.getValue(), p.getId());
             if ("boss".equals(p.getName())) {
-                offer.setAmmount(offer.getAmmount() * 9);
+                offer.setAmount(offer.getAmount() * 9);
             } else if ("manager".equals(p.getName())) {
-                offer.setAmmount(offer.getAmmount() * 3);
+                offer.setAmount(offer.getAmount() * 3);
             }
             offers.add(offer);
             //System.out.println(offer);

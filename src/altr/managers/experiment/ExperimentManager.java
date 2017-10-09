@@ -1,7 +1,7 @@
 package altr.managers.experiment;
 
 import altr.Environment;
-import altr.distributions.Distribution;
+import altr.distributions.api.Distribution;
 import altr.entity.Offer;
 import altr.entity.Person;
 import altr.experiment.Experiment;

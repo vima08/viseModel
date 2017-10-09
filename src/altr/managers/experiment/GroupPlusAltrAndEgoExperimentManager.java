@@ -2,7 +2,7 @@ package altr.managers.experiment;
 
 import altr.Environment;
 import static altr.Runner.writer;
-import altr.distributions.Distribution;
+import altr.distributions.api.Distribution;
 import altr.entity.Group;
 import altr.entity.Offer;
 import altr.entity.Person;
@@ -11,7 +11,7 @@ import altr.managers.Analyzer;
 import altr.managers.PersonManager;
 import altr.strategies.GroupPlusAltruisticStrategy;
 import altr.strategies.SimpleEgoisticStrategy;
-import altr.strategies.SimpleGroupStrategy;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -58,7 +58,7 @@ public class GroupPlusAltrAndEgoExperimentManager extends ExperimentManager {
         ArrayList<Offer> o = (ArrayList)offers;
         for(int i =0; i < pM.getPeople().size(); i++) {
             Double money = p.get(i).getMoney();
-            p.get(i).setMoney(money + o.get(i).getAmmount());
+            p.get(i).setMoney(money + o.get(i).getAmount());
         }
     }
 

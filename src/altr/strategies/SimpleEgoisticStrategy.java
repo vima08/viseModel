@@ -24,7 +24,7 @@ public class SimpleEgoisticStrategy implements Strategy {
     public boolean vote(Collection<Offer> offers, Collection<Person> people, long personId) {
         for(Offer offer: offers) {
             if (offer.getPersonId() == personId) {
-                return (offer.getAmmount() > threshold);
+                return (offer.getAmount() > threshold);
             }
         }
         return false;

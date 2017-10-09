@@ -27,9 +27,9 @@ public class HierarchicalBossStrategy implements Strategy {
         double t = 0;
         for(Offer offer: offers) {
             if (offer.getPersonId() == personId) {
-                s = offer.getAmmount();
+                s = offer.getAmount();
             } else {
-                t += offer.getAmmount();
+                t += offer.getAmount();
             }
         }
         return (alfa * s + (1 - alfa) * t) > 0;

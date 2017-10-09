@@ -3,12 +3,11 @@ package altr.entity;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *
  * @author Vitaly
  */
 public class Group {
     private static AtomicInteger uniqueId = new AtomicInteger();
-    
+
     private long id;
     private String description;
     private String name;
@@ -41,6 +40,6 @@ public class Group {
         this.id = uniqueId.getAndIncrement();
         this.description = description;
         this.name = name;
-    }    
-    
+    }
+
 }

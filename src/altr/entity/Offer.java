@@ -1,19 +1,18 @@
 package altr.entity;
 
 /**
- *
  * @author Vitaly
  */
 public class Offer {
-    private double ammount; 
+    private double amount;
     private long personId;
 
-    public double getAmmount() {
-        return ammount;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setAmmount(double ammount) {
-        this.ammount = ammount;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public long getPersonId() {
@@ -25,13 +24,13 @@ public class Offer {
     }
 
     public Offer(double ammount, long personId) {
-        this.ammount = ammount;
+        this.amount = ammount;
         this.personId = personId;
-    }    
+    }
 
     @Override
     public String toString() {
-        return "Offer{" + "ammount=" + ammount + ", personId=" + personId + '}';
-    }    
-    
+        return "Offer{" + "amount=" + amount + ", personId=" + personId + '}';
+    }
+
 }
