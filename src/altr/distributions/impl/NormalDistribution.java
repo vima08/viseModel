@@ -1,4 +1,6 @@
-package altr.distributions;
+package altr.distributions.impl;
+
+import altr.distributions.api.Distribution;
 
 import java.util.Random;
 

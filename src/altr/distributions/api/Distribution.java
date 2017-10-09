@@ -1,4 +1,4 @@
-package altr.distributions;
+package altr.distributions.api;
 
 /**
  * @author Vitaly
