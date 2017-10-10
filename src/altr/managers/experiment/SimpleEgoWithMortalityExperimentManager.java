@@ -25,8 +25,8 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
     double[] acceptanceCounters;
     double alpha; // acceptance
     SimpleGroupStrategy groupStrategy;
-    double[] totalIncrement;
-    long[] incrementCounter;
+    double totalIncrement;
+    long incrementCounter;
     Person egoPerson;
     int egoCount;
     long peopleCount[];
@@ -43,8 +43,8 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
         egoPerson = egoist;
         egoCount = egoSize;
 
-        this.totalIncrement = new double[stepNumber];
-        this.incrementCounter = new long[stepNumber];
+        this.totalIncrement = 0;
+        this.incrementCounter = 0;
         this.peopleCount = new long[stepNumber];
         
         pM.getPeople().addAll(others);
@@ -55,13 +55,13 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
         Collection<Person> people = pM.getPeople();
         peopleCount[step] += people.size();
         if (!isAccepted) {
-            incrementCounter[0] += people.size();
+            incrementCounter += people.size();
         } else {
             for(Offer o: offers) {
                 Person p  = PersonManager.getPersonById(o.getPersonId(), people);
                 p.setMoney(p.getMoney() + o.getAmount());
-                totalIncrement[0] += o.getAmount();
-                incrementCounter[0]++;
+                totalIncrement += o.getAmount();
+                incrementCounter++;
             }       
         }
     }
@@ -77,8 +77,8 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
         int last = stepNumber-1;
         writer.value(Double.toString(othersAvgMoney[last]/iterationNumber)).
             value(Double.toString(acceptanceCounters[last]/iterationNumber)).
-            value(Double.toString(totalIncrement[0]/iterationNumber)).
-            value(Long.toString(incrementCounter[0]/iterationNumber)).
+            value(Double.toString(totalIncrement/iterationNumber)).
+            value(Long.toString(incrementCounter/iterationNumber)).
             value(Long.toString(peopleCount[last]/iterationNumber)).
             newLine();
         System.out.println("Finished!");
