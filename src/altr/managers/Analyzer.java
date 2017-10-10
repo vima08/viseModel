@@ -14,7 +14,15 @@ import java.util.List;
  */
 public class Analyzer {
 
-    private static Comparator<Person> comparator = (p1, p2) -> (int) (p1.getMoney() - p2.getMoney());
+    private static Comparator<Person> comparator = (p1, p2) -> {
+        double diff = p1.getMoney() - p2.getMoney();
+        if (diff > 0)
+            return 1;
+        else if (diff < 0)
+            return -1;
+        else
+            return 0;
+    };
 
     public static double getAverageMoney(Collection<Person> people) {
         double sum = 0;
@@ -86,7 +94,15 @@ public class Analyzer {
 
     public static List<Person> sort(Collection<Person> people) {
         List<Person> rezult = new ArrayList(people);
-        Collections.sort(rezult, comparator);
+        rezult.sort(comparator);
         return rezult;
+    }
+
+    public static List<Long> getQuotaPersonIds(List<Person> people, int leftIndex, int rightIndex) {
+        List<Long> result = new ArrayList();
+        for (int i = leftIndex; i <= rightIndex; i++) {
+            result.add(people.get(i).getId());
+        }
+        return result;
     }
 }

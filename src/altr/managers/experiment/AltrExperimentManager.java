@@ -30,14 +30,14 @@ public class AltrExperimentManager extends ExperimentManager {
     SimpleAltruisticStrategy altrStrategy;
     double acceptance;
   
-    public AltrExperimentManager(Experiment experiment, Environment env, Person altr, int altrSize, Person egoist, int egoSize, double acceptance) throws CloneNotSupportedException {
+    public AltrExperimentManager(Experiment experiment, Environment env, Person altr, int altrSize, Person egoist, int egoSize, double acceptance, double leftBound, double rightBound) throws CloneNotSupportedException {
         super(experiment, env);
         this.altrSize = altrSize;
         groupAvgMoney = new double[stepNumber]; 
         othersAvgMoney = new double[stepNumber]; 
         avgMoney = new double[stepNumber]; 
         acceptanceCounters = new double[stepNumber]; 
-        altrStrategy = new SimpleAltruisticStrategy(0.0);
+        altrStrategy = new SimpleAltruisticStrategy(leftBound, rightBound, 0.0);
         this.acceptance = acceptance;
         altr.setStrategy(altrStrategy);
         egoist.setStrategy(new SimpleEgoisticStrategy());
@@ -50,7 +50,11 @@ public class AltrExperimentManager extends ExperimentManager {
         pM.getPeople().addAll(group);
         pM.getPeople().addAll(others);
     }
-    
+
+    public AltrExperimentManager(Experiment experiment, Environment env, Person altr, int altrSize, Person egoist, int egoSize, double acceptance) throws CloneNotSupportedException {
+        this(experiment, env, altr, altrSize, egoist, egoSize, acceptance, 0, 100);
+    }
+
     public AltrExperimentManager(Experiment experiment, Environment env, Person altr, int altrSize, Person egoist, int egoSize) throws CloneNotSupportedException {
         this(experiment, env, altr, altrSize, egoist, egoSize, 0.5);
     }
