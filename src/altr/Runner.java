@@ -5,6 +5,7 @@ import altr.experiment.Stage;
 import altr.experiment.Experiment;
 import altr.distributions.impl.NormalDistribution;
 import altr.managers.experiment.AltrExperimentManager;
+import altr.managers.experiment.AltrWithMortalityExperimentManager;
 import altr.managers.experiment.SimpleEgoWithMortalityExperimentManager;
 import javenue.csv.Csv;
 
@@ -110,7 +111,7 @@ public class Runner {
             System.out.println("mu = " + mu);            
             Environment env = new Environment("test");
             //SimpleEgoWithMortalityExperimentManager eM = new SimpleEgoWithMortalityExperimentManager(exp, env, egoist, PEOPLE_NUM, 0.5);
-            AltrExperimentManager eM = new AltrExperimentManager(exp, env, altrMan, PEOPLE_NUM, egoist, 0, 0.5, 0, 50);
+            AltrWithMortalityExperimentManager eM = new AltrWithMortalityExperimentManager(exp, env, altrMan, PEOPLE_NUM, egoist, 0, 0.5, 0, 50);
             eM.carryOut();
         }
         writer.close();
