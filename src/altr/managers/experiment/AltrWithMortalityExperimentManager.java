@@ -164,6 +164,7 @@ public class AltrWithMortalityExperimentManager extends ExperimentManager {
         step = 0;
         acceptanceCounter = 0;
         pM.setPeople(others);
+        pM.getPeople().addAll(group);
     }
     
 }
