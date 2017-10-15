@@ -20,15 +20,15 @@ public class Runner {
 //    static int STEP_NUMBER = 40;
 //    static int PEOPLE_NUM = 100;
     
-    static int ITERATION_NUMBER = 100;
+    static int ITERATION_NUMBER = 1000;
     static int STEP_NUMBER = 500;
     static int PEOPLE_NUM = 201;
     
     public static void main(String[] args) throws CloneNotSupportedException {         
 
 //        Person groupMan = new Person(10, true, 0, 1, 0, "name", null);
-        Person egoist = new Person(10, true, 1, 0, 0, "name", null);
-        Person altrMan = new Person(40, true, 0, 0, 1, "name", null);
+        Person egoist = new Person(40, true, 1, 0, 0, "name", null);
+//        Person altrMan = new Person(40, true, 0, 0, 1, "name", null);
                 
         //for(int i = 1; i < PEOPLE_NUM - 50; i++){
 //        for(int i = 1; i < PEOPLE_NUM; i++){
@@ -104,7 +104,7 @@ public class Runner {
         
         
         //for(int i = 1; i < 100; i++){
-        for(int i = -250; i <= 0; i++){
+        for(int i = -250; i <= 0; i+= 10){
             Experiment exp = new Experiment(1, ITERATION_NUMBER, "", "test1");
             //double mu = ((double)i - 50) / 50;
             double mu = (double)i/10;
@@ -113,8 +113,8 @@ public class Runner {
             exp.addStage(stage);            
             System.out.println("mu = " + mu);            
             Environment env = new Environment("test");
-            //SimpleEgoWithMortalityExperimentManager eM = new SimpleEgoWithMortalityExperimentManager(exp, env, egoist, PEOPLE_NUM, 0.5);
-            AltrWithMortalityExperimentManager eM = new AltrWithMortalityExperimentManager(exp, env, altrMan, PEOPLE_NUM, egoist, 0, 0.5, 0, 65);
+            SimpleEgoWithMortalityExperimentManager eM = new SimpleEgoWithMortalityExperimentManager(exp, env, egoist, PEOPLE_NUM, 0.5);
+//            AltrWithMortalityExperimentManager eM = new AltrWithMortalityExperimentManager(exp, env, altrMan, PEOPLE_NUM, egoist, 0, 0.5, 0, 65);
             eM.carryOut();
         }
         writer.close();
