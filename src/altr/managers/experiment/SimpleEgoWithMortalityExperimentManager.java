@@ -75,7 +75,7 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
 //                    value(Double.toString(avgMoney[i]/iterationNumber)).value(Double.toString(acceptanceCounters[i]/iterationNumber)).newLine();
 //        }
         int last = stepNumber-1;
-        writer.value(Double.toString(othersAvgMoney[last]/iterationNumber)).
+        writer.//value(Double.toString(othersAvgMoney[last]/iterationNumber)).
             value(Double.toString(acceptanceCounters[last]/iterationNumber)).
             value(Double.toString(totalIncrement/iterationNumber)).
             value(Long.toString(incrementCounter/iterationNumber)).
