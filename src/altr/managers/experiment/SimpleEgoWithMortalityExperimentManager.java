@@ -110,7 +110,7 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
             if (p.getStrategy().vote(offers, pM.getPeople(),  p.getId())) votes++;
         }
         double percentage = votes / number;
-        return (percentage >= alpha);
+        return (percentage > alpha);
     }
 
     @Override

@@ -108,7 +108,7 @@ public class SimpleThresholdExperimentM extends ExperimentManager {
             if (p.getStrategy().vote(offers, pM.getPeople(),  p.getId())) votes++;
         }
         double percentage = votes / number;
-        return (percentage >= 0.5);
+        return (percentage > 0.5);
     }
 
     @Override

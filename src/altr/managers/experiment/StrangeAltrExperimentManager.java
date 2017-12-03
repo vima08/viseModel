@@ -108,7 +108,7 @@ public class StrangeAltrExperimentManager extends ExperimentManager {
             if (p.getStrategy().vote(offers, pM.getPeople(),  p.getId())) votes++;
         }
         double percentage = votes / number;
-        return (percentage >= acceptance);
+        return (percentage > acceptance);
     }
 
     @Override
