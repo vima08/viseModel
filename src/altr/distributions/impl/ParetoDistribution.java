@@ -36,7 +36,7 @@ public class ParetoDistribution implements Distribution {
 
     @Override
     public String getName() {
-        return "ParetoDistribution";
+        return String.format("ParetoDistribution mean = %f , deviation = %f, k = %f", mean, deviation, k);
     }
 
 }

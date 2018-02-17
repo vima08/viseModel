@@ -1,0 +1,23 @@
+--People by initial money
+40
+80
+q
+--variable (start, finish, step)
+-250
+0
+10
+-- distribution and params
+ParetoDistribution
+*
+0.1
+1
+20
+--iteration and step numbers
+50
+500
+--Expetiment manager and params (person number, people count alpha)
+SimpleEgoWithMortalityExperimentManager
+1
+100
+0.5
+
