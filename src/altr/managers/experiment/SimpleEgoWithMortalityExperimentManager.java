@@ -78,8 +78,8 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
         writer.//value(Double.toString(othersAvgMoney[last]/iterationNumber)).
             value(Double.toString(acceptanceCounters[last]/iterationNumber)).
             value(Double.toString(totalIncrement/iterationNumber)).
-            value(Long.toString(incrementCounter/iterationNumber)).
-            value(Long.toString(peopleCount[last]/iterationNumber)).
+            value(Double.toString(Double.valueOf(Long.toString(incrementCounter))/iterationNumber)).
+            value(Double.toString(Double.valueOf(Long.toString(peopleCount[last]))/iterationNumber)).
             newLine();
         System.out.println("Finished!");
     }
