@@ -44,7 +44,7 @@ public abstract class ExperimentManager {
                     //System.out.println("Step " + step + ": ");
                     //System.out.println(pM.getPeople());
                     Collection<Offer> offers = generateOffers(stage.getDestribution(), pM.getPeople());
-                    boolean accepted = isAccepted(offers);                    
+                    boolean accepted = isAccepted(offers, env.getAlpha());
                     accept(accepted, offers);
                     if (accepted) acceptanceCounter++;
                     analysis();
@@ -78,7 +78,16 @@ public abstract class ExperimentManager {
         return offers;
     }
 
-    protected abstract boolean isAccepted(Collection<Offer> offers);
+    protected boolean isAccepted(Collection<Offer> offers, double alpha) {
+        double votes = 0;
+        long number = pM.getPeople().size();
+        for(Person p: pM.getPeople()) {
+            if (p.getStrategy().vote(offers, pM.getPeople(),  p.getId())) votes++;
+        }
+        double percentage = votes / number;
+        return (percentage > alpha);
+    }
+
     protected abstract void accept(Boolean isAccepted, Collection<Offer> offers);
     protected abstract void results();
     protected abstract void analysis();

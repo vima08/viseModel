@@ -115,7 +115,7 @@ public class HierarchicalExperimentManager extends ExperimentManager {
     }
 
     @Override
-    protected boolean isAccepted(Collection<Offer> offers) {
+    protected boolean isAccepted(Collection<Offer> offers, double alpha) {
         double votes = 0;
         long number = this.employees.size() * 3;
         for(Person p: pM.getPeople()) {

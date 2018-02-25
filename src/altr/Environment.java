@@ -20,13 +20,15 @@ public class Environment {
     private Collection<Group> groups;
     private Collection<Membership> memberships;
     private Collection<Person> people;
+    private double alpha;
 
-    public Environment(String name) {
+    public Environment(String name, double alpha) {
         this.id = uniqueId.getAndIncrement();
         this.name = name;
         this.groups = new ArrayList<>();
         this.memberships = new ArrayList<>();
         this.people = new ArrayList<>();
+        this.alpha = alpha;
     }
 
     public long getId() {
@@ -69,4 +71,11 @@ public class Environment {
         this.people = people;
     }
 
+    public double getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(double alpha) {
+        this.alpha = alpha;
+    }
 }

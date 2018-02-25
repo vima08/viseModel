@@ -159,7 +159,7 @@ public class Runner {
                 Stage stage = new Stage(exp.getId(), (Integer)stepNumber.getValue(i), dist , 1);
                 System.out.println(dist.getName());
                 exp.addStage(stage);
-                Environment env = new Environment("test");
+                Environment env = new Environment("test", (Double) alpha.getValue(i));
                 ExperimentManager eM = (ExperimentManager)experimentManagerConstructor.newInstance(exp, env,
                         people.get((Integer)personNumber.getValue(i)-1), peopleCount.getValue(i), alpha.getValue(i));
                 eM.carryOut();

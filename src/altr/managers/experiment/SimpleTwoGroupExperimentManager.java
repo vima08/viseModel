@@ -101,17 +101,6 @@ public class SimpleTwoGroupExperimentManager extends ExperimentManager {
     }
 
     @Override
-    protected boolean isAccepted(Collection<Offer> offers) {
-        double votes = 0;
-        long number = pM.getPeople().size();
-        for(Person p: pM.getPeople()) {
-            if (p.getStrategy().vote(offers, pM.getPeople(),  p.getId())) votes++;
-        }
-        double percentage = votes / number;
-        return (percentage > 0.5);
-    }
-
-    @Override
     protected void postprocessing() {
         groupStrategy.reset();
         for(Person p: pM.getPeople()){

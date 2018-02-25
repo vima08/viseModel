@@ -72,17 +72,6 @@ public class SimpleEgoExperimentManager extends ExperimentManager {
     }
 
     @Override
-    protected boolean isAccepted(Collection<Offer> offers) {
-        double votes = 0;
-        long number = pM.getPeople().size();
-        for(Person p: pM.getPeople()) {
-            if (p.getStrategy().vote(offers, pM.getPeople(),  p.getId())) votes++;
-        }
-        double percentage = votes / number;
-        return (percentage > alpha);
-    }
-
-    @Override
     protected void postprocessing() {        
         for(Person p: pM.getPeople()){
             p.setActive(p.getMoney() > 0);

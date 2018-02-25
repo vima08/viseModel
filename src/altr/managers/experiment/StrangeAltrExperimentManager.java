@@ -90,17 +90,6 @@ public class StrangeAltrExperimentManager extends ExperimentManager {
     }
 
     @Override
-    protected boolean isAccepted(Collection<Offer> offers) {
-        double votes = 0;
-        long number = pM.getPeople().size();
-        for(Person p: pM.getPeople()) {
-            if (p.getStrategy().vote(offers, pM.getPeople(),  p.getId())) votes++;
-        }
-        double percentage = votes / number;
-        return (percentage > acceptance);
-    }
-
-    @Override
     protected void postprocessing() {
         altrStrategy.reset();
         for(Person p: pM.getPeople()){
