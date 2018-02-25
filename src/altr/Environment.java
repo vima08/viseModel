@@ -22,13 +22,17 @@ public class Environment {
     private Collection<Person> people;
     private double alpha;
 
-    public Environment(String name, double alpha) {
+    public Environment(String name, Double alpha) {
         this.id = uniqueId.getAndIncrement();
         this.name = name;
         this.groups = new ArrayList<>();
         this.memberships = new ArrayList<>();
         this.people = new ArrayList<>();
-        this.alpha = alpha;
+        if (alpha != null) {
+            this.alpha = alpha;
+        } else {
+            this.alpha = 0.5;
+        }
     }
 
     public long getId() {

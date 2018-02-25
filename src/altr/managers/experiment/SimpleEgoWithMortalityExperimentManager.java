@@ -23,7 +23,6 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
     Collection<Person> others;    
     double[] othersAvgMoney;    
     double[] acceptanceCounters;
-    double alpha; // acceptance
     SimpleGroupStrategy groupStrategy;
     double totalIncrement;
     long incrementCounter;
@@ -31,9 +30,8 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
     int egoCount;
     long peopleCount[];
 
-    public SimpleEgoWithMortalityExperimentManager(Experiment experiment, Environment env, Person egoist, int egoSize, Double alpha) throws CloneNotSupportedException {
-        super(experiment, env);                
-        this.alpha = alpha;
+    public SimpleEgoWithMortalityExperimentManager(Experiment experiment, Environment env, Person egoist, int egoSize) throws CloneNotSupportedException {
+        super(experiment, env);
         othersAvgMoney = new double[stepNumber];         
         acceptanceCounters = new double[stepNumber]; 
         

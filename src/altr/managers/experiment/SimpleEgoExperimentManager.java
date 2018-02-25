@@ -22,12 +22,10 @@ public class SimpleEgoExperimentManager extends ExperimentManager {
     Collection<Person> others;    
     double[] othersAvgMoney;    
     double[] acceptanceCounters;
-    double alpha; // acceptance
     SimpleGroupStrategy groupStrategy;
 
-    public SimpleEgoExperimentManager(Experiment experiment, Environment env, Person egoist, int egoSize, Double alpha) throws CloneNotSupportedException {
-        super(experiment, env);                
-        this.alpha = alpha;
+    public SimpleEgoExperimentManager(Experiment experiment, Environment env, Person egoist, int egoSize) throws CloneNotSupportedException {
+        super(experiment, env);
         othersAvgMoney = new double[stepNumber];         
         acceptanceCounters = new double[stepNumber]; 
         

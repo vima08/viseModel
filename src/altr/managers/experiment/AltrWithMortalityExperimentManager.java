@@ -32,14 +32,13 @@ public class AltrWithMortalityExperimentManager extends ExperimentManager {
     int altrSize;
     int egoCount;
     SimpleAltruisticStrategy altrStrategy;
-    double acceptance;
     double totalIncrement;
     long incrementCounter;
     long peopleCount[];
     Person egoPerson;
     Person altrPerson;
 
-    public AltrWithMortalityExperimentManager(Experiment experiment, Environment env, Person altr, int altrSize, Person egoist, int egoSize, double acceptance, double leftBound, double rightBound) throws CloneNotSupportedException {
+    public AltrWithMortalityExperimentManager(Experiment experiment, Environment env, Person altr, int altrSize, Person egoist, int egoSize, double leftBound, double rightBound) throws CloneNotSupportedException {
         super(experiment, env);
         this.altrSize = altrSize;
         this.egoCount = egoSize;
@@ -48,7 +47,6 @@ public class AltrWithMortalityExperimentManager extends ExperimentManager {
         avgMoney = new double[stepNumber];
         acceptanceCounters = new double[stepNumber];
         altrStrategy = new SimpleAltruisticStrategy(leftBound, rightBound, 0.0);
-        this.acceptance = acceptance;
         altr.setStrategy(altrStrategy);
         egoist.setStrategy(new SimpleEgoisticStrategy());
         this.group = PersonManager.clonePerson(altr, altrSize);
@@ -66,12 +64,8 @@ public class AltrWithMortalityExperimentManager extends ExperimentManager {
         pM.getPeople().addAll(others);
     }
 
-    public AltrWithMortalityExperimentManager(Experiment experiment, Environment env, Person altr, int altrSize, Person egoist, int egoSize, double acceptance) throws CloneNotSupportedException {
-        this(experiment, env, altr, altrSize, egoist, egoSize, acceptance, 0, 100);
-    }
-
     public AltrWithMortalityExperimentManager(Experiment experiment, Environment env, Person altr, int altrSize, Person egoist, int egoSize) throws CloneNotSupportedException {
-        this(experiment, env, altr, altrSize, egoist, egoSize, 0.5);
+        this(experiment, env, altr, altrSize, egoist, egoSize, 0, 100);
     }
     
     @Override

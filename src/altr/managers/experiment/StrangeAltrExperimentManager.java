@@ -28,13 +28,11 @@ public class StrangeAltrExperimentManager extends ExperimentManager {
     double[] acceptanceCounters;
     int altrSize;
     StrangeAltruisticStrategy altrStrategy;
-    Double acceptance;
 
     public StrangeAltrExperimentManager(Experiment experiment, Environment env, Person altrMan, 
-            int altrSize, Person egoist, int egoSize, double threshold, double acceptance) throws CloneNotSupportedException {
+            int altrSize, Person egoist, int egoSize, double threshold) throws CloneNotSupportedException {
         super(experiment, env);
         this.altrSize = altrSize;
-        this.acceptance = acceptance;
         altrAvgMoney = new double[stepNumber]; 
         othersAvgMoney = new double[stepNumber]; 
         avgMoney = new double[stepNumber]; 
