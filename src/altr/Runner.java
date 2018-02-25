@@ -134,7 +134,7 @@ public class Runner {
         Variable peopleCount = readVariable(lines, reader, "peopleCount", true);
         reader = postReadVariable(reader, peopleCount);
 
-        Variable alpha = readVariable(lines, reader, "peopleCount", false);
+        Variable alpha = readVariable(lines, reader, "alpha", false);
         reader = postReadVariable(reader, alpha);
 
         //---------------------------------------------------
