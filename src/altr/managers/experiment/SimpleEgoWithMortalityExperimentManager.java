@@ -24,11 +24,8 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
     double[] othersAvgMoney;    
     double[] acceptanceCounters;
     SimpleGroupStrategy groupStrategy;
-    double totalIncrement;
-    long incrementCounter;
     Person egoPerson;
     int egoCount;
-    long peopleCount[];
 
     public SimpleEgoWithMortalityExperimentManager(Experiment experiment, Environment env, Person egoist, int egoSize) throws CloneNotSupportedException {
         super(experiment, env);
@@ -40,28 +37,8 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
         this.others = PersonManager.clonePerson(egoist, egoSize);
         egoPerson = egoist;
         egoCount = egoSize;
-
-        this.totalIncrement = 0;
-        this.incrementCounter = 0;
-        this.peopleCount = new long[stepNumber];
         
         pM.getPeople().addAll(others);
-    }
-    
-    @Override
-    protected void accept(Boolean isAccepted, Collection<Offer> offers) {
-        Collection<Person> people = pM.getPeople();
-        peopleCount[step] += people.size();
-        if (!isAccepted) {
-            incrementCounter += people.size();
-        } else {
-            for(Offer o: offers) {
-                Person p  = PersonManager.getPersonById(o.getPersonId(), people);
-                p.setMoney(p.getMoney() + o.getAmount());
-                totalIncrement += o.getAmount();
-                incrementCounter++;
-            }       
-        }
     }
 
     @Override

@@ -37,17 +37,6 @@ public class SimpleEgoExperimentManager extends ExperimentManager {
     }
     
     @Override
-    protected void accept(Boolean isAccepted, Collection<Offer> offers) {
-        if (!isAccepted) return;
-        ArrayList<Person> p = (ArrayList)pM.getPeople();
-        ArrayList<Offer> o = (ArrayList)offers;
-        for(int i =0; i < pM.getPeople().size(); i++) {
-            Double money = p.get(i).getMoney();
-            p.get(i).setMoney(money + o.get(i).getAmount());
-        }
-    }
-
-    @Override
     protected void results() {      
 //        writer.comment("test");
 //        writer.value("Average capital").newLine();

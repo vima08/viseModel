@@ -69,22 +69,6 @@ public class AltrWithMortalityExperimentManager extends ExperimentManager {
     }
     
     @Override
-    protected void accept(Boolean isAccepted, Collection<Offer> offers) {
-        Collection<Person> people = pM.getPeople();
-        peopleCount[step] += people.size();
-        if (!isAccepted) {
-            incrementCounter += people.size();
-        } else {
-            for(Offer o: offers) {
-                Person p  = PersonManager.getPersonById(o.getPersonId(), people);
-                p.setMoney(p.getMoney() + o.getAmount());
-                totalIncrement += o.getAmount();
-                incrementCounter++;
-            }
-        }
-    }
-
-    @Override
     protected void results() {      
 //        writer.comment("test");
 //        writer.value("Average capital").newLine();

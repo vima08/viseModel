@@ -26,6 +26,9 @@ public abstract class ExperimentManager {
     int step;
     int stepNumber;
     int iterationNumber;
+    double totalIncrement;
+    long incrementCounter;
+    long peopleCount[];
     
     public ExperimentManager(Experiment experiment, Environment env) {
         this.experiment = experiment;
@@ -34,6 +37,9 @@ public abstract class ExperimentManager {
         this.gM = new GroupManager(this.env);
         this.iterationNumber = experiment.getIterationNumber();
         stepNumber = experiment.getStepNumber();
+        this.totalIncrement = 0;
+        this.incrementCounter = 0;
+        this.peopleCount = new long[stepNumber];
     }
     
     public void carryOut(){
@@ -88,7 +94,21 @@ public abstract class ExperimentManager {
         return (percentage > alpha);
     }
 
-    protected abstract void accept(Boolean isAccepted, Collection<Offer> offers);
+    protected void accept(Boolean isAccepted, Collection<Offer> offers) {
+        Collection<Person> people = pM.getPeople();
+        peopleCount[step] += people.size();
+        if (!isAccepted) {
+            incrementCounter += people.size();
+        } else {
+            for(Offer o: offers) {
+                Person p  = PersonManager.getPersonById(o.getPersonId(), people);
+                p.setMoney(p.getMoney() + o.getAmount());
+                totalIncrement += o.getAmount();
+                incrementCounter++;
+            }
+        }
+    }
+
     protected abstract void results();
     protected abstract void analysis();
     protected abstract void postprocessing();
