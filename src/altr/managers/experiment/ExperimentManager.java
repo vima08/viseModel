@@ -8,6 +8,8 @@ import altr.experiment.Experiment;
 import altr.experiment.Stage;
 import altr.managers.GroupManager;
 import altr.managers.PersonManager;
+
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -65,8 +67,17 @@ public abstract class ExperimentManager {
         step = 0;
         acceptanceCounter = 0;
     }
-    
-    protected abstract Collection<Offer> generateOffers(Distribution dist, Collection<Person> people);
+
+    protected Collection<Offer> generateOffers(Distribution dist, Collection<Person> people) {
+        Collection<Offer> offers = new ArrayList();
+        for(Person p: people) {
+            Offer offer = new Offer(dist.getValue(), p.getId());
+            offers.add(offer);
+            //System.out.println(offer);
+        }
+        return offers;
+    }
+
     protected abstract boolean isAccepted(Collection<Offer> offers);
     protected abstract void accept(Boolean isAccepted, Collection<Offer> offers);
     protected abstract void results();

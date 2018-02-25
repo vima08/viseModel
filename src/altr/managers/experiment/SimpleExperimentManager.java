@@ -88,17 +88,6 @@ public class SimpleExperimentManager extends ExperimentManager {
     }
 
     @Override
-    protected Collection<Offer> generateOffers(Distribution dist, Collection<Person> people) {
-        Collection<Offer> offers = new ArrayList();
-        for(Person p: people) {
-            Offer offer = new Offer(dist.getValue(), p.getId());
-            offers.add(offer);
-            //System.out.println(offer);
-        }
-        return offers;
-    }
-
-    @Override
     protected boolean isAccepted(Collection<Offer> offers) {
         double votes = 0;
         long number = pM.getPeople().size();
