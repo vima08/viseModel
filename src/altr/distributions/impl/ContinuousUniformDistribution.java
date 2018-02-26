@@ -23,7 +23,7 @@ public class ContinuousUniformDistribution implements Distribution {
         this.deviation = (b - a) / Math.sqrt(12);
     }
 
-    public ContinuousUniformDistribution(double mean, double deviation, boolean x) {
+    public ContinuousUniformDistribution(double mean, double deviation, double x) {
         this.mean = mean;
         this.deviation = deviation;
         this.a = mean - deviation * Math.sqrt(12) / 2;
@@ -38,7 +38,9 @@ public class ContinuousUniformDistribution implements Distribution {
 
     @Override
     public String getName() {
-        return "ContinuousUniformDistribution";
+        return String.format("ContinuousUniformDistribution " +
+                "mean = %f , deviation = %f, " +
+                "a = %f, b = %f", mean, deviation, a, b);
     }
 
 }
