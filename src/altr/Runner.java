@@ -38,6 +38,11 @@ public class Runner {
         if (!folder.exists()) {
             boolean created = folder.mkdir();
             if (logEnable) System.out.printf("Result folder created: %s \n", created);
+            try {
+                Files.copy(Paths.get("input.txt"), Paths.get(String.format("out/%s/input.txt", reportDate)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (logEnable) System.out.println(folder.getAbsolutePath());
         writer = new Csv.Writer(String.format("out/%s/result.csv", reportDate)).delimiter(';');
@@ -149,7 +154,7 @@ public class Runner {
 
         Constructor distConstructor = null;
         Constructor experimentManagerConstructor = null;
-        distConstructor = distribution.getDeclaredConstructors()[0];
+        distConstructor = distribution.getDeclaredConstructors()[1];
         experimentManagerConstructor = experimentManager.getDeclaredConstructors()[0];
 
         try {
@@ -161,7 +166,7 @@ public class Runner {
                 exp.addStage(stage);
                 Environment env = new Environment("test", (Double) alpha.getValue(i));
                 ExperimentManager eM = (ExperimentManager)experimentManagerConstructor.newInstance(exp, env,
-                        people.get((Integer)personNumber.getValue(i)-1), peopleCount.getValue(i), alpha.getValue(i));
+                        people.get((Integer)personNumber.getValue(i)-1), peopleCount.getValue(i));
                 eM.carryOut();
             }
         } catch (InstantiationException e) {
