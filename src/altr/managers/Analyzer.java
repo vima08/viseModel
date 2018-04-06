@@ -105,4 +105,13 @@ public class Analyzer {
         }
         return result;
     }
+
+    public static double getOfferByPersonId(Collection<Offer> offers, Long personId) throws Exception {
+        for(Offer offer: offers) {
+            if (offer.getPersonId() == personId) {
+                return offer.getAmount();
+            }
+        }
+        throw new Exception("Offer is not found");
+    }
 }
