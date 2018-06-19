@@ -99,6 +99,8 @@ public class Person implements Cloneable {
         p.id = uniqueId.getAndIncrement();
         p.money = money;
         p.name = name;
+        p.initialMoney = initialMoney;
+        p.strategy  = strategy;
         return p;
     }
 

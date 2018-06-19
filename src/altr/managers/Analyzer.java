@@ -57,11 +57,12 @@ public class Analyzer {
                 sum += o.getAmount();
             }
         }
-        if (count == personIds.size()) {
-            return sum / count;
-        } else {
-            throw new Exception("getAverageOffer: count != personIds.size()");
-        }
+        return sum / count;
+//        if (count == personIds.size()) {
+//            return sum / count;
+//        } else {
+//            throw new Exception(String.format("getAverageOffer: count [%s] != personIds.size() [%s]", count, personIds.size() ));
+//        }
     }
 
     public static double getAverageOffer(Collection<Offer> offers) {

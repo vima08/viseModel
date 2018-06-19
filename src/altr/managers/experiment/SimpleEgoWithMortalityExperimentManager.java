@@ -50,11 +50,14 @@ public class SimpleEgoWithMortalityExperimentManager extends ExperimentManager {
 //                    value(Double.toString(avgMoney[i]/iterationNumber)).value(Double.toString(acceptanceCounters[i]/iterationNumber)).newLine();
 //        }
         int last = stepNumber-1;
+        double increment = totalIncrement/iterationNumber;
+        double incCout = Double.valueOf(Long.toString(incrementCounter))/iterationNumber;
         writer.//value(Double.toString(othersAvgMoney[last]/iterationNumber)).
             value(Double.toString(acceptanceCounters[last]/iterationNumber)).
-            value(Double.toString(totalIncrement/iterationNumber)).
-            value(Double.toString(Double.valueOf(Long.toString(incrementCounter))/iterationNumber)).
+            value(Double.toString(increment)).
+            value(Double.toString(incCout)).
             value(Double.toString(Double.valueOf(Long.toString(peopleCount[last]))/iterationNumber)).
+            value(Double.toString(increment/incCout)).
             newLine();
         System.out.println("Finished!");
     }

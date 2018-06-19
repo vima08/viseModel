@@ -30,22 +30,7 @@ public class Runner {
     private static final boolean logEnable = true;
 
     static {
-        DateFormat df = new SimpleDateFormat("yy.MM.dd_HH.mm.ss");
-        Date now = Calendar.getInstance().getTime();
-        String reportDate = df.format(now);
 
-        File folder = new File(String.format("out/%s", reportDate));
-        if (!folder.exists()) {
-            boolean created = folder.mkdir();
-            if (logEnable) System.out.printf("Result folder created: %s \n", created);
-            try {
-                Files.copy(Paths.get("input.txt"), Paths.get(String.format("out/%s/input.txt", reportDate)));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (logEnable) System.out.println(folder.getAbsolutePath());
-        writer = new Csv.Writer(String.format("out/%s/result.csv", reportDate)).delimiter(';');
     }
     
 //    static int ITERATION_NUMBER = 1000;
@@ -59,10 +44,29 @@ public class Runner {
     private static List<Person> people = new ArrayList<>();
     
     public static void main(String[] args) throws CloneNotSupportedException {
+        long startTime = System.nanoTime();
+        String inputFile = args[0];
+
+        DateFormat df = new SimpleDateFormat("yy.MM.dd_HH.mm.ss");
+        Date now = Calendar.getInstance().getTime();
+        String reportDate = df.format(now);
+
+        File folder = new File(String.format("out/%s", reportDate));
+        if (!folder.exists()) {
+            boolean created = folder.mkdir();
+            if (logEnable) System.out.printf("Result folder created: %s \n", created);
+            try {
+                Files.copy(Paths.get(inputFile), Paths.get(String.format("out/%s/%s", reportDate,inputFile)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (logEnable) System.out.println(folder.getAbsolutePath());
+        writer = new Csv.Writer(String.format("out/%s/result.csv", reportDate)).delimiter(',');
 
         List<String> lines = null;
         try {
-            lines = Files.readAllLines(Paths.get("input.txt"), StandardCharsets.UTF_8);
+            lines = Files.readAllLines(Paths.get(inputFile), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -154,19 +158,20 @@ public class Runner {
 
         Constructor distConstructor = null;
         Constructor experimentManagerConstructor = null;
-        distConstructor = distribution.getDeclaredConstructors()[1];
+        distConstructor = distribution.getDeclaredConstructors()[0];
         experimentManagerConstructor = experimentManager.getDeclaredConstructors()[0];
 
         try {
             for(int i = start; i <= finish; i += step) {
                 Experiment exp = new Experiment(1, (Integer)iterationNumber.getValue(i), "", "test1");
-                Distribution dist = (Distribution) distConstructor.newInstance(mu.getValue(i), sigma.getValue(i), k.getValue(i));
+                Distribution dist = (Distribution) distConstructor.newInstance(mu.getValue(i), sigma.getValue(i));//, k.getValue(i));
                 Stage stage = new Stage(exp.getId(), (Integer)stepNumber.getValue(i), dist , 1);
                 System.out.println(dist.getName());
                 exp.addStage(stage);
                 Environment env = new Environment("test", (Double) alpha.getValue(i));
                 ExperimentManager eM = (ExperimentManager)experimentManagerConstructor.newInstance(exp, env,
-                        people.get((Integer)personNumber.getValue(i)-1), peopleCount.getValue(i));
+                        people.get(0), peopleCount.getValue(i), people.get(1), 202 - (Integer) peopleCount.getValue(i));
+                                //(Integer)personNumber.getValue(i)-1), peopleCount.getValue(i));
                 eM.carryOut();
             }
         } catch (InstantiationException e) {
@@ -196,6 +201,8 @@ public class Runner {
 //        System.out.println("Enter start");
 
         writer.close();
+        long finishTime = System.nanoTime();
+        System.out.println(Double.valueOf(Long.toString(finishTime - startTime))/1000000000);
     }
 
 }
