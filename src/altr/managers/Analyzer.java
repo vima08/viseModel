@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Vitaly
@@ -30,6 +31,18 @@ public class Analyzer {
             sum += p.getMoney();
         }
         return sum / people.size();
+    }
+
+    public static double getGeometricMeanMoney(Collection<Person> people) {
+        double mul = 1;
+        for (Person p : people) {
+            mul *= p.getMoney();
+        }
+        return Math.pow(mul, 1.0 / people.size());
+    }
+
+    public static double getMedianMoney(Collection<Person> people) {
+        return people.stream().map(person -> person.getMoney()).sorted().collect(Collectors.toList()).get(people.size()/2);
     }
 
     public static double getAverageMoney(Collection<Person> people, Collection<Long> personIds) throws Exception {

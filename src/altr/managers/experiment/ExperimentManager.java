@@ -51,6 +51,7 @@ public abstract class ExperimentManager {
                     //System.out.println(pM.getPeople());
                     Collection<Offer> offers = generateOffers(stage.getDestribution(), pM.getPeople());
                     boolean accepted = isAccepted(offers, env.getAlpha());
+                    //mulAccept(accepted, offers);
                     accept(accepted, offers);
                     if (accepted) acceptanceCounter++;
                     analysis();
@@ -103,6 +104,21 @@ public abstract class ExperimentManager {
             for(Offer o: offers) {
                 Person p  = PersonManager.getPersonById(o.getPersonId(), people);
                 p.setMoney(p.getMoney() + o.getAmount());
+                totalIncrement += o.getAmount();
+                incrementCounter++;
+            }
+        }
+    }
+
+    protected void mulAccept(Boolean isAccepted, Collection<Offer> offers) {
+        Collection<Person> people = pM.getPeople();
+        peopleCount[step] += people.size();
+        if (!isAccepted) {
+            incrementCounter += people.size();
+        } else {
+            for(Offer o: offers) {
+                Person p  = PersonManager.getPersonById(o.getPersonId(), people);
+                p.setMoney(p.getMoney() * Math.pow(Math.E, o.getAmount()));
                 totalIncrement += o.getAmount();
                 incrementCounter++;
             }

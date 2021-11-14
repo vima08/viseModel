@@ -62,7 +62,7 @@ public class Runner {
             }
         }
         if (logEnable) System.out.println(folder.getAbsolutePath());
-        writer = new Csv.Writer(String.format("out/%s/result.csv", reportDate)).delimiter(',');
+        writer = new Csv.Writer(String.format("out/%s/result.csv", reportDate)).delimiter(';');
 
         List<String> lines = null;
         try {
@@ -110,14 +110,14 @@ public class Runner {
         String distributionName = readClassName(lines, reader, "distributionName");
         reader++;
 
-        Variable mu = readVariable(lines, reader, "mu", false);
+        Variable mu = readVariable(lines, reader, "a", false);
         reader = postReadVariable(reader, mu);
 
-        Variable sigma = readVariable(lines, reader, "sigma", false);
+        Variable sigma = readVariable(lines, reader, "b", false);
         reader = postReadVariable(reader, sigma);
 
-        Variable k = readVariable(lines, reader, "k", false);
-        reader = postReadVariable(reader, k);
+      //  Variable k = readVariable(lines, reader, "k", false);
+      //  reader = postReadVariable(reader, k);
 
         //---------------------------------------------------
 
@@ -158,19 +158,19 @@ public class Runner {
 
         Constructor distConstructor = null;
         Constructor experimentManagerConstructor = null;
-        distConstructor = distribution.getDeclaredConstructors()[0];
+        distConstructor = distribution.getDeclaredConstructors()[1];
         experimentManagerConstructor = experimentManager.getDeclaredConstructors()[0];
 
         try {
             for(int i = start; i <= finish; i += step) {
                 Experiment exp = new Experiment(1, (Integer)iterationNumber.getValue(i), "", "test1");
-                Distribution dist = (Distribution) distConstructor.newInstance(mu.getValue(i), sigma.getValue(i));//, k.getValue(i));
+                Distribution dist = (Distribution) distConstructor.newInstance(mu.getValue(i), sigma.getValue(i),0);//, k.getValue(i));
                 Stage stage = new Stage(exp.getId(), (Integer)stepNumber.getValue(i), dist , 1);
                 System.out.println(dist.getName());
                 exp.addStage(stage);
                 Environment env = new Environment("test", (Double) alpha.getValue(i));
                 ExperimentManager eM = (ExperimentManager)experimentManagerConstructor.newInstance(exp, env,
-                        people.get(0), peopleCount.getValue(i), people.get(1), 202 - (Integer) peopleCount.getValue(i));
+                        people.get(0), peopleCount.getValue(i));
                                 //(Integer)personNumber.getValue(i)-1), peopleCount.getValue(i));
                 eM.carryOut();
             }

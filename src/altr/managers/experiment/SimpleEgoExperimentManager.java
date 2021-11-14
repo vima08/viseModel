@@ -20,13 +20,17 @@ import java.util.Collection;
 public class SimpleEgoExperimentManager extends ExperimentManager {    
     
     Collection<Person> others;    
-    double[] othersAvgMoney;    
+    double[] othersAvgMoney;
+    double[] othersGMeanMoney;
+    double[] othersMedianMoney;
     double[] acceptanceCounters;
     SimpleGroupStrategy groupStrategy;
 
     public SimpleEgoExperimentManager(Experiment experiment, Environment env, Person egoist, int egoSize) throws CloneNotSupportedException {
         super(experiment, env);
-        othersAvgMoney = new double[stepNumber];         
+        othersAvgMoney = new double[stepNumber];
+        othersGMeanMoney = new double[stepNumber];
+        othersMedianMoney = new double[stepNumber];
         acceptanceCounters = new double[stepNumber]; 
         
         egoist.setStrategy(new SimpleEgoisticStrategy());
@@ -46,6 +50,8 @@ public class SimpleEgoExperimentManager extends ExperimentManager {
 //        }
         int last = stepNumber-1;
         writer.value(Double.toString(othersAvgMoney[last]/iterationNumber)).
+                value(Double.toString(othersGMeanMoney[last]/iterationNumber)).
+                value(Double.toString(othersMedianMoney[last]/iterationNumber)).
             value(Double.toString(acceptanceCounters[last]/iterationNumber)).
             newLine();
         System.out.println("Finished!");
@@ -54,7 +60,11 @@ public class SimpleEgoExperimentManager extends ExperimentManager {
     @Override
     protected void analysis() {        
         double avg1 = Analyzer.getAverageMoney(others);
+        double gMean = Analyzer.getGeometricMeanMoney(others);
+        double median = Analyzer.getMedianMoney(others);
         othersAvgMoney[step] += avg1;
+        othersGMeanMoney[step] += gMean;
+        othersMedianMoney[step] += median;
         acceptanceCounters[step] += acceptanceCounter;
     }
 
