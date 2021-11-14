@@ -110,10 +110,10 @@ public class Runner {
         String distributionName = readClassName(lines, reader, "distributionName");
         reader++;
 
-        Variable mu = readVariable(lines, reader, "a", false);
+        Variable mu = readVariable(lines, reader, "mu", false);
         reader = postReadVariable(reader, mu);
 
-        Variable sigma = readVariable(lines, reader, "b", false);
+        Variable sigma = readVariable(lines, reader, "sigma", false);
         reader = postReadVariable(reader, sigma);
 
       //  Variable k = readVariable(lines, reader, "k", false);
@@ -158,20 +158,19 @@ public class Runner {
 
         Constructor distConstructor = null;
         Constructor experimentManagerConstructor = null;
-        distConstructor = distribution.getDeclaredConstructors()[1];
+        distConstructor = distribution.getDeclaredConstructors()[0];
         experimentManagerConstructor = experimentManager.getDeclaredConstructors()[0];
 
         try {
             for(int i = start; i <= finish; i += step) {
                 Experiment exp = new Experiment(1, (Integer)iterationNumber.getValue(i), "", "test1");
-                Distribution dist = (Distribution) distConstructor.newInstance(mu.getValue(i), sigma.getValue(i),0);//, k.getValue(i));
+                Distribution dist = (Distribution) distConstructor.newInstance(mu.getValue(i), sigma.getValue(i));//, k.getValue(i));
                 Stage stage = new Stage(exp.getId(), (Integer)stepNumber.getValue(i), dist , 1);
                 System.out.println(dist.getName());
                 exp.addStage(stage);
                 Environment env = new Environment("test", (Double) alpha.getValue(i));
                 ExperimentManager eM = (ExperimentManager)experimentManagerConstructor.newInstance(exp, env,
                         people.get(0), peopleCount.getValue(i));
-                                //(Integer)personNumber.getValue(i)-1), peopleCount.getValue(i));
                 eM.carryOut();
             }
         } catch (InstantiationException e) {

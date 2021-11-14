@@ -78,6 +78,22 @@ public class Analyzer {
 //        }
     }
 
+    public static double getAveragePerspectiveOffer(Collection<Offer> offers, Collection<Long> personIds) throws Exception {
+        int count = 0;
+        double sum = 0;
+        for (Offer o : offers) {
+            if (personIds.contains(o.getPersonId())) {
+                count++;
+                if (o.getAmount() < 0) {
+                    sum += 2 * o.getAmount();
+                } else {
+                    sum += o.getAmount();
+                }
+            }
+        }
+        return sum / count;
+    }
+
     public static double getAverageOffer(Collection<Offer> offers) {
         int count = 0;
         double sum = 0;

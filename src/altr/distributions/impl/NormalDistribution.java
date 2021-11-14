@@ -26,7 +26,8 @@ public class NormalDistribution implements Distribution {
 
     @Override
     public String getName() {
-        return "NormalDistribution";
+        return String.format("NormalDistribution " +
+                "mean = %f , deviation = %f", mean, deviation);
     }
 
 }
