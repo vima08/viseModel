@@ -16,7 +16,7 @@ import static altr.Runner.writer;
  *
  * @author Vitaly
  */
-public class SimpleSimpleGroupExperimentManager extends ExperimentManager {
+public class SimpleGroupExperimentManager extends ExperimentManager {
 
     Collection<Person> group;
     double[] avgMoney;
@@ -24,7 +24,7 @@ public class SimpleSimpleGroupExperimentManager extends ExperimentManager {
     int groupSize;
     SimpleGroupStrategy groupStrategy;
 
-    public SimpleSimpleGroupExperimentManager(Experiment experiment, Environment env, Person groupMan, int groupSize) throws CloneNotSupportedException {
+    public SimpleGroupExperimentManager(Experiment experiment, Environment env, Person groupMan, int groupSize) throws CloneNotSupportedException {
         super(experiment, env);
         this.groupSize = groupSize;
         avgMoney = new double[stepNumber]; 
