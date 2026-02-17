@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100">
+  <defs>
+    <style>
+      .title { font: 700 42px Arial, sans-serif; fill: #1f2937; }
+      .subtitle { font: 24px Arial, sans-serif; fill: #374151; }
+      .box-title { font: 700 26px Arial, sans-serif; fill: #1f2937; }
+      .box-text { font: 20px Arial, sans-serif; fill: #374151; }
+      .arrow { stroke: #4b5563; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .label { font: 18px Arial, sans-serif; fill: #4b5563; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4b5563" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f9fafb"/>
+
+  <text x="900" y="62" text-anchor="middle" class="title">ViSE Model Project Architecture</text>
+  <text x="900" y="100" text-anchor="middle" class="subtitle">From configuration parsing to stochastic voting simulation and results</text>
+
+  <!-- Row 1 -->
+  <rect x="60" y="150" rx="14" ry="14" width="390" height="220" fill="#fff4e6" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="80" y="188" class="box-title">1) Input &amp; Bootstrap</text>
+  <text x="80" y="220" class="box-text">• input.txt + Reader parser</text>
+  <text x="80" y="252" class="box-text">• Runner / BackEnd entrypoints</text>
+  <text x="80" y="284" class="box-text">• Reflection loads classes</text>
+  <text x="80" y="316" class="box-text">• CSV writer setup</text>
+
+  <rect x="500" y="150" rx="14" ry="14" width="420" height="220" fill="#eaf2ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="520" y="188" class="box-title">2) Experiment Model</text>
+  <text x="520" y="220" class="box-text">• Experiment(iterations, stages)</text>
+  <text x="520" y="252" class="box-text">• Stage(stepNum, Distribution)</text>
+  <text x="520" y="284" class="box-text">• Distribution interface</text>
+  <text x="520" y="316" class="box-text">• Normal/Pareto/Uniform/Constant</text>
+
+  <rect x="970" y="150" rx="14" ry="14" width="360" height="220" fill="#e9fff1" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="990" y="188" class="box-title">3) Environment</text>
+  <text x="990" y="220" class="box-text">• alpha threshold</text>
+  <text x="990" y="252" class="box-text">• people, groups</text>
+  <text x="990" y="284" class="box-text">• memberships</text>
+  <text x="990" y="316" class="box-text">• shared mutable state</text>
+
+  <rect x="1380" y="150" rx="14" ry="14" width="360" height="220" fill="#f2ecff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="1400" y="188" class="box-title">4) Managers</text>
+  <text x="1400" y="220" class="box-text">• ExperimentManager base</text>
+  <text x="1400" y="252" class="box-text">• Simple / Combined / Altr /</text>
+  <text x="1400" y="284" class="box-text">  Hierarchical variants</text>
+  <text x="1400" y="316" class="box-text">• results() / analysis() hooks</text>
+
+  <!-- Row 2 -->
+  <rect x="100" y="450" rx="14" ry="14" width="760" height="280" fill="#e8f7ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="120" y="488" class="box-title">5) Simulation Core: ExperimentManager.carryOut()</text>
+  <text x="120" y="520" class="box-text">• Nested loops: iterations → stages → steps</text>
+  <text x="120" y="552" class="box-text">• generateOffers(): one random offer per person</text>
+  <text x="120" y="584" class="box-text">• vote: Strategy.vote(offers, people, personId)</text>
+  <text x="120" y="616" class="box-text">• accepted iff votes/people &gt; alpha</text>
+  <text x="120" y="648" class="box-text">• accept(): apply money increments only if accepted</text>
+  <text x="120" y="680" class="box-text">• analysis() + postprocessing() each step</text>
+
+  <rect x="920" y="450" rx="14" ry="14" width="560" height="280" fill="#ffeffc" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="940" y="488" class="box-title">6) Agents &amp; Strategy Layer</text>
+  <text x="940" y="520" class="box-text">• Person(money, active, ego/group/altr, strategy)</text>
+  <text x="940" y="552" class="box-text">• Strategy interface and implementations</text>
+  <text x="940" y="584" class="box-text">• Egoistic / Group / Altruistic / Combined</text>
+  <text x="940" y="616" class="box-text">• PersonManager + GroupManager utilities</text>
+
+  <rect x="1520" y="450" rx="14" ry="14" width="220" height="280" fill="#fffdeb" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="1540" y="488" class="box-title">7) Output</text>
+  <text x="1540" y="520" class="box-text">• Analyzer metrics</text>
+  <text x="1540" y="552" class="box-text">• Final aggregation</text>
+  <text x="1540" y="584" class="box-text">• result.csv</text>
+  <text x="1540" y="616" class="box-text">• out/&lt;timestamp&gt;/</text>
+
+  <!-- Row 3 -->
+  <rect x="420" y="790" rx="14" ry="14" width="980" height="220" fill="#eefaf0" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="440" y="830" class="box-title">Core ViSE Semantics</text>
+  <text x="440" y="864" class="box-text">• Environment proposes stochastic independent increments for all agents.</text>
+  <text x="440" y="896" class="box-text">• Agents vote according to their strategy objective (ego/group/altruism mix).</text>
+  <text x="440" y="928" class="box-text">• If support exceeds alpha, proposal is applied; otherwise state remains unchanged.</text>
+  <text x="440" y="960" class="box-text">• Repeated over many steps and iterations, then compared by average final capital.</text>
+
+  <!-- Arrows -->
+  <path class="arrow" d="M450 260 L500 260"/>
+  <text x="465" y="250" class="label">build</text>
+
+  <path class="arrow" d="M920 260 L970 260"/>
+  <text x="935" y="250" class="label">attach</text>
+
+  <path class="arrow" d="M1330 260 L1380 260"/>
+  <text x="1345" y="250" class="label">instantiate</text>
+
+  <path class="arrow" d="M710 370 L420 450"/>
+  <text x="520" y="420" class="label">stages + dist</text>
+
+  <path class="arrow" d="M1120 370 L1030 450"/>
+  <text x="1040" y="420" class="label">people/groups</text>
+
+  <path class="arrow" d="M1560 370 L1440 450"/>
+  <text x="1480" y="420" class="label">orchestrates</text>
+
+  <path class="arrow" d="M860 590 L920 590"/>
+  <text x="872" y="578" class="label">vote()</text>
+
+  <path class="arrow" d="M1480 590 L1520 590"/>
+  <text x="1488" y="578" class="label">metrics</text>
+
+  <path class="arrow" d="M1200 730 L1200 790"/>
+  <text x="1210" y="768" class="label">interpretation</text>
+</svg>
