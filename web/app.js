@@ -96,13 +96,13 @@ function runSimpleEgo(params) {
           }
         }
 
-        for (let idx = people.length - 1; idx >= 0; idx -= 1) {
+       /* for (let idx = people.length - 1; idx >= 0; idx -= 1) {
           if (people[idx].money < 0) {
             people.splice(idx, 1);
           }
         }
 
-        if (people.length === 0) break;
+        if (people.length === 0) break; */
       }
 
       for (const person of people) {
