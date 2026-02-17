@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vise Model (JavaScript)</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="container">
+    <h1>Vise Model Experiment Runner</h1>
+    <p>JavaScript port of the Simple Ego experiment from the Java backend.</p>
+
+    <form id="experiment-form" class="panel grid">
+      <label>Distribution
+        <select name="distribution" required>
+          <option value="ParetoDistribution">Pareto</option>
+          <option value="NormalDistribution">Normal</option>
+          <option value="ContinuousUniformDistribution">Continuous Uniform</option>
+        </select>
+      </label>
+
+      <label>Initial capital
+        <input type="number" name="capital" value="10" step="0.1" required />
+      </label>
+
+      <label>Mean (mu)
+        <input type="number" name="mu" value="0.1" step="0.01" required />
+      </label>
+
+      <label>Deviation (sigma)
+        <input type="number" name="sigma" value="3" step="0.1" required />
+      </label>
+
+      <label>Pareto k
+        <input type="number" name="k" value="20" step="0.1" required />
+      </label>
+
+      <label>Iterations
+        <input type="number" name="iterNum" value="1000" min="1" step="1" required />
+      </label>
+
+      <label>Steps per iteration
+        <input type="number" name="stepNum" value="10" min="1" step="1" required />
+      </label>
+
+      <label>People count
+        <input type="number" name="peopleCount" value="11" min="1" step="1" required />
+      </label>
+
+      <label>Voting alpha (0..1)
+        <input type="number" name="alpha" value="0.5" min="0" max="1" step="0.01" required />
+      </label>
+
+      <label>Start multiplier
+        <input type="number" name="start" value="-150" step="1" required />
+      </label>
+
+      <label>Finish multiplier
+        <input type="number" name="finish" value="50" step="1" required />
+      </label>
+
+      <label>Multiplier step
+        <input type="number" name="step" value="10" min="1" step="1" required />
+      </label>
+
+      <div class="actions">
+        <button type="submit">Run experiment</button>
+        <button type="button" id="export-btn" disabled>Export CSV</button>
+      </div>
+    </form>
+
+    <section class="panel">
+      <h2>Result chart: mean offer vs total/inc ratio</h2>
+      <canvas id="result-chart" height="120"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>Acceptance chart: mean offer vs acceptance rate</h2>
+      <canvas id="acceptance-chart" height="120"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>Last run output</h2>
+      <pre id="result-json">Run an experiment to see data...</pre>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
